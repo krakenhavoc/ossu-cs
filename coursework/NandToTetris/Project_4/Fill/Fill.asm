@@ -9,7 +9,7 @@
 // the screen should be cleared.
 
 //    screen_start = SCREEN
-//    screed_end   = 24575
+//    screen_end   = 24575
 //
 // LOOP (while True):
 //    screen_addr = screen_start
