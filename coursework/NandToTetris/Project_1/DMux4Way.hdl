@@ -1,0 +1,43 @@
+// This file is derived from www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/1/DMux4Way.hdl
+/**
+ * 4-way demultiplexor:
+ * [a, b, c, d] = [in, 0, 0, 0] if sel = 00
+ *                [0, in, 0, 0] if sel = 01
+ *                [0, 0, in, 0] if sel = 10
+ *                [0, 0, 0, in] if sel = 11
+ */
+CHIP DMux4Way {
+    IN in, sel[2];
+    OUT a, b, c, d;
+
+    PARTS:
+    DMux(in=in, sel=sel[1], a=dIn0, b=dIn1);
+    DMux(in=dIn0, sel=sel[0], a=a, b=b);
+    DMux(in=dIn1, sel=sel[0], a=c, b=d);
+
+/**  ^ Cleaner implementation above ^ v Bruteforced implementation below v
+ *   // May be used by modules below
+ *   Xor(a=in, b=sel[0], out=xorinsel0);
+ *   Xor(a=in, b=sel[1], out=xorinsel1);
+ *   Nand(a=sel[0], b=sel[1], out=nandsel0sel1);
+ *
+ *   // a = 1 if all true
+ *   And(a=xorinsel0, b=xorinsel1, out=andxorinsel0xorinsel1);
+ *   And(a=andxorinsel0xorinsel1, b=nandsel0sel1, out=a);
+ *
+ *   // b = 1 if all true
+ *   And(a=in, b=sel[0], out=andbsel0);
+ *   And(a=andbsel0, b=nandsel0sel1, out=b);
+ *
+ *   // c = 1 if all true
+ *   And(a=in, b=sel[1], out=andinsel1);
+ *   And(a=xorinsel0, b=andinsel1, out=c);
+ *
+ *   // d = 1 if all true
+ *   And(a=sel[0], b=sel[1], out=andsel0sel1);
+ *   And(a=in, b=andsel0sel1, out=d);
+ */
+}
