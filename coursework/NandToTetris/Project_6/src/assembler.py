@@ -68,7 +68,7 @@ def main(fileName=sys.argv[1]):
 # Boolean Dictionary String String > Dictionary
 def symbol_table_manager(initialize=False, st=None, k=None, v=None):
     if initialize:
-        with open('/Users/luke/devops/repos/LabXP/ossu-nand2tetris/Project_6/data/symbol_table.csv', mode='r') as stFile:
+        with open('../data/symbol_table.csv', mode='r') as stFile:
             reader = csv.reader(stFile)
             next(reader, None)  # skip header row
             st = {rows[0]: rows[1] for rows in reader}
