@@ -67,7 +67,7 @@ CHIP ALU {
     // Handles out zr
     Or8Way(in=l8, out=l8nonzero);
     Or8Way(in=h8, out=h8nonzero);
-    Or(a=l8nonzero, b=l8nonzero, out=nzr);
+    Or(a=l8nonzero, b=h8nonzero, out=nzr);
     Not(in=nzr, out=zr);
 
     // Handles out ng
