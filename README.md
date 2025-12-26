@@ -445,7 +445,16 @@ What is next for you? The possibilities are boundless and overlapping:
 
 ## How to show your progress
 
-[Fork](https://www.freecodecamp.org/news/how-to-fork-a-github-repository/) the [GitHub repo](https://github.com/ossu/computer-science) into your own GitHub account and put ✅ next to the stuff you've completed as you complete it. This can serve as your [kanban board](https://en.wikipedia.org/wiki/Kanban_board) and will be faster to implement than any other solution (giving you time to spend on the courses).
+Track your progress through the curriculum using the Progress column in each course table. To mark a course as complete:
+
+1. **Edit the README.md** file in your fork
+2. **Find the course** you've completed
+3. **Change `[ ]` to `[x]`** in the Progress column
+4. **Commit your changes** to track your progress over time
+
+Example: Change `| [ ]` to `| [x]` when you complete a course.
+
+This approach turns the README into your personal [kanban board](https://en.wikipedia.org/wiki/Kanban_board), allowing you to track your journey through the curriculum while keeping your focus on learning.
 
 # Team
 
