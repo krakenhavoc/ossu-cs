@@ -1,0 +1,82 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "compile Class-basedProgramDesign",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "cd \"${workspaceFolder}\" && find . -name \"*.java\" > sources.txt && javac -cp \"lib/tester.jar:lib/javalib.jar\" -d out @sources.txt"
+      ],
+      
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+    ,
+    {
+      "label": "run tester Examples (prompt)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "cd \"${workspaceFolder}\" && java -Djava.awt.headless=true -cp out:lib/tester.jar:lib/javalib.jar tester.Main ${input:examplesClass}"
+      ],
+      "dependsOn": "compile Class-basedProgramDesign",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+    ,
+    {
+      "label": "compile and run (prompt)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "cd \"${workspaceFolder}\" && \n         find . -name \"*.java\" > sources.txt && \n         javac -cp \"lib/tester.jar:lib/javalib.jar\" -d out @sources.txt && \n         echo '--- RUN OUTPUT ---' && \n         java -Djava.awt.headless=true -cp out:lib/tester.jar:lib/javalib.jar ${input:runClass}"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+    ,
+    {
+      "label": "run all examples (current file)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "cd \"${workspaceFolder}\" && ./.vscode/run_all_examples.sh \"${file}\""
+      ],
+      "dependsOn": "compile Class-basedProgramDesign",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+  ]
+  ,
+  "inputs": [
+    {
+      "id": "examplesClass",
+      "type": "promptString",
+      "description": "Enter Examples class for tester (e.g. Week_2.Book.ExamplesBooks or ExamplesShapes)",
+      "default": "${file}"
+    }
+    ,
+    {
+      "id": "runClass",
+      "type": "promptString",
+      "description": "Enter fully-qualified class to run (e.g. Week_2.Book.ExamplesBooks)",
+      "default": "${file}"
+    }
+  ]
+}

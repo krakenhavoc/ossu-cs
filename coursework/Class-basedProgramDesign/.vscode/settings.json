@@ -1,0 +1,6 @@
+{
+  "java.project.referencedLibraries": [
+    "${workspaceFolder}/lib/**/*.jar",
+    "${workspaceFolder}/coursework/Class-basedProgramDesign/lib/**/*.jar"
+  ]
+}

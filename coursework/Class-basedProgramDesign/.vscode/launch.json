@@ -1,0 +1,48 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "node",
+            "name": "Shell: Run Examples (prompt)",
+            "request": "launch",
+            "runtimeExecutable": "bash",
+            "runtimeArgs": [
+                "-lc",
+                "cd \"${workspaceFolder}\" && find . -name \"*.java\" > sources.txt && javac -cp \"lib/tester.jar:lib/javalib.jar\" -d out @sources.txt && echo '--- RUN OUTPUT ---' && java -Djava.awt.headless=true -cp out:lib/tester.jar:lib/javalib.jar tester.Main ${input:examplesClass}"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "name": "Shell: Run Current Java (auto)",
+            "request": "launch",
+            "runtimeExecutable": "bash",
+            "runtimeArgs": [
+                "-lc",
+                "cd \"${workspaceFolder}\" && file=\"${file}\" && if [ -z \"$file\" ]; then echo 'No active file open'; exit 1; fi; cls=$(.vscode/get_java_class.sh \"$file\") && find . -name \"*.java\" > sources.txt && javac -cp \"lib/tester.jar:lib/javalib.jar\" -d out @sources.txt && echo '--- RUN OUTPUT ---' && java -Djava.awt.headless=true -cp out:lib/tester.jar:lib/javalib.jar tester.Main \"$cls\""
+            ],
+            "console": "integratedTerminal"
+        }
+        ,
+        {
+            "type": "node",
+            "name": "Shell: Run All Examples In Current File",
+            "request": "launch",
+            "runtimeExecutable": "bash",
+            "runtimeArgs": [
+                "-lc",
+                "cd \"${workspaceFolder}\" && file=\"${file}\" && if [ -z \"$file\" ]; then echo 'No active file open'; exit 1; fi; ./.vscode/run_all_examples.sh \"$file\""
+            ],
+            "console": "integratedTerminal"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "examplesClass",
+            "type": "promptString",
+            "description": "Enter Examples class for tester (e.g. Week_2.Book.ExamplesBooks)",
+            "default": "${fileBasenameNoExtension}"
+        }
+    ]
+}
