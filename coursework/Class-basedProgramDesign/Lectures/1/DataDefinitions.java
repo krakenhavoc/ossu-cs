@@ -1,5 +1,3 @@
-package Week_1.DataDefinitions;
-
 /**
  * HtDC Lectures
  * Lecture 2: Designing Simple Classes: Books and Authors

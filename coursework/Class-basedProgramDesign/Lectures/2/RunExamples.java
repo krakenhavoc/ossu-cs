@@ -1,5 +1,3 @@
-package Week_1.DataDefinitions;
-
 public class RunExamples {
     public static void main(String[] args) {
         ExamplesBooks ex = new ExamplesBooks();

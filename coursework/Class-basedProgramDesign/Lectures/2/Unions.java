@@ -1,5 +1,3 @@
-package Week_1.Unions;
-
 /**
  * HtDC Lectures
  * Lecture 3: Data Definitions: Unions

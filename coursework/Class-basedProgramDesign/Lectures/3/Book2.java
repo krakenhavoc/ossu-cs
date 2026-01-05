@@ -1,5 +1,3 @@
-package Week_2.Book2;
-
 import tester.*;
 
 /*
