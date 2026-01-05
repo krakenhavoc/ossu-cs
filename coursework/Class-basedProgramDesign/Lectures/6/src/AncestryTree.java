@@ -2,9 +2,16 @@ import tester.Tester;
 
 interface IAT {
 	int count();
+
 	int countHelper();
+
 	int countFemaleAnc();
+
 	int countFemaleAncHelper();
+
+	boolean wellFormed();
+
+	boolean wellFormedHelper(int childYob);
 }
 
 class Unknown implements IAT {
@@ -22,9 +29,17 @@ class Unknown implements IAT {
 	public int countFemaleAnc() {
 		return 0;
 	}
-	
+
 	public int countFemaleAncHelper() {
 		return 0;
+	}
+
+	public boolean wellFormed() {
+		return true;
+	}
+
+	public boolean wellFormedHelper(int childYob) {
+		return true;
 	}
 }
 
@@ -50,16 +65,27 @@ class Person implements IAT {
 	public int countHelper() {
 		return 1 + this.mom.countHelper() + this.dad.countHelper();
 	}
-	
+
 	public int countFemaleAnc() {
 		return this.mom.countFemaleAncHelper() + this.dad.countFemaleAncHelper();
 	}
+
 	public int countFemaleAncHelper() {
-		if ( this.isMale == false ) {
+		if (this.isMale == false) {
 			return 1 + this.mom.countFemaleAncHelper() + this.dad.countFemaleAncHelper();
-		} else {
+		}
+		else {
 			return this.mom.countFemaleAncHelper() + this.dad.countFemaleAncHelper();
 		}
+	}
+
+	public boolean wellFormed() {
+		return this.mom.wellFormedHelper(this.yob) && this.dad.wellFormedHelper(this.yob)
+				&& this.mom.wellFormed() && this.dad.wellFormed();
+	}
+
+	public boolean wellFormedHelper(int childYob) {
+		return this.yob < childYob;
 	}
 }
 
@@ -89,8 +115,12 @@ class ExamplesIAT {
 	boolean testIATCount(Tester t) {
 		return t.checkExpect(andrew.count(), 16);
 	}
-	
+
 	boolean testIATFemaleAnc(Tester t) {
 		return t.checkExpect(andrew.countFemaleAnc(), 8);
+	}
+
+	boolean testIATWellFormed(Tester t) {
+		return t.checkExpect(andrew.wellFormed(), true);
 	}
 }
